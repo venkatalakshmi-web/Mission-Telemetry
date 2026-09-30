@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">◉</span>
+            <span>MISSION<br>CONTROL</span>
+            <button class="close-sidebar">×</button>
+        </div>
+
+        <nav>
+            <a href="dashboard.html">Home</a>
+            <a href="telemetry.html">Telemetry</a>
+            <a href="logs.html">Logs</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="settings.html" class="active">Settings</a>
+        </nav>
+
+    </aside>
+
+
+    <header class="dashboard-header">
+
+        <button class="menu-button" id="menuButton">☰</button>
+
+        <h1>Mission Settings</h1>
+        <p>System Configuration</p>
+
+    </header>
+
+
+    <main class="settings-container">
+
+        <section class="settings-panel">
+
+            <h2>Monitoring Settings</h2>
+
+            <div class="setting-row">
+                <div>
+                    <strong>Telemetry Monitoring</strong>
+                    <p>Enable live telemetry updates</p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="telemetryToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+
+            <div class="setting-row">
+                <div>
+                    <strong>Alert Monitoring</strong>
+                    <p>Monitor abnormal telemetry values</p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="alertToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+        </section>
+
+
+        <section class="settings-panel">
+
+            <h2>Display Settings</h2>
+
+            <div class="setting-row">
+                <div>
+                    <strong>Auto Refresh</strong>
+                    <p>Automatically refresh mission data</p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="refreshToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+
+            <div class="setting-row">
+                <div>
+                    <strong>System Notifications</strong>
+                    <p>Show system activity notifications</p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="notificationToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+        </section>
+
+
+        <section class="settings-panel">
+
+            <h2>Mission Information</h2>
+
+            <div class="mission-info">
+
+                <div>
+                    <span>Mission</span>
+                    <strong>Telemetry Monitoring</strong>
+                </div>
+
+                <div>
+                    <span>Mode</span>
+                    <strong>Simulation</strong>
+                </div>
+
+                <div>
+                    <span>System</span>
+                    <strong>Online</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="settings.js"></script>
+
+</body>
+</html>

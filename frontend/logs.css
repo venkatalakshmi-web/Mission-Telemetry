@@ -1,0 +1,124 @@
+.logs-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 25px;
+    margin-left: 250px;
+    margin-right: 30px;
+}
+
+.logs-panel {
+    background: rgba(8, 28, 50, 0.9);
+    padding: 25px;
+    margin-bottom: 22px;
+    border-radius: 14px;
+    border: 1px solid #164e73;
+    border-left: 5px solid #38bdf8;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.logs-panel h2 {
+    margin: 0;
+    color: white;
+    font-size: 21px;
+}
+
+.logs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#logStatus {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #12365a;
+    color: #7dd3fc;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* Logs Table */
+
+.logs-table {
+    display: grid;
+    gap: 8px;
+}
+
+.log-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 100px;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px 18px;
+
+    background: rgba(15, 42, 70, 0.9);
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+
+    color: #cbd5e1;
+}
+
+.log-heading {
+    background: #0b1d33;
+    color: #93c5fd;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.log-row strong {
+    font-size: 12px;
+    color: #4ade80;
+}
+
+
+/* System Events */
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.event-card {
+    background: rgba(15, 42, 70, 0.9);
+    padding: 20px;
+    border-radius: 9px;
+    border: 1px solid #2563eb;
+}
+
+.event-card span {
+    display: block;
+    color: #93c5fd;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.event-card strong {
+    color: white;
+    font-size: 22px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+    .logs-container {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 0;
+    }
+
+    .log-row {
+        grid-template-columns: 90px 1fr 70px;
+        font-size: 13px;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    background:
+    linear-gradient(rgba(2, 11, 24, 0.55), rgba(2, 11, 24, 0.75)),
+    url("earth-bg.jpg") center center / cover no-repeat fixed;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 30px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+header h1 {
+    font-size: 52px;
+    margin-bottom: 15px;
+}
+
+header p {
+    color: #93c5fd;
+    font-size: 20px;
+}
+
+main {
+    max-width: 750px;
+    margin: auto;
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(8, 28, 50, 0.9);
+    border: 1px solid #164e73;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+main h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+main p {
+    color: #cbd5e1;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+main button {
+    padding: 14px 30px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+main button:hover {
+    background: #1d4ed8;
+}
+.mission-info {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 25px 0 35px;
+    color: #93c5fd;
+    font-size: 15px;
+}
+
+.mission-info span {
+    padding: 8px 12px;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid #164e73;
+    border-radius: 6px;
+}
+.dashboard-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 28px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dashboard-button:hover {
+    background: #1d4ed8;
+}

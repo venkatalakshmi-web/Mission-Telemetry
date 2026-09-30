@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Logs</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="logs.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">◉</span>
+            <span>MISSION<br>CONTROL</span>
+            <button class="close-sidebar">×</button>
+        </div>
+
+        <nav>
+            <a href="dashboard.html">Home</a>
+            <a href="telemetry.html">Telemetry</a>
+            <a href="logs.html" class="active">Logs</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+
+    </aside>
+
+
+    <header class="dashboard-header">
+
+        <button class="menu-button" id="menuButton">☰</button>
+
+        <h1>Mission Logs</h1>
+        <p>Mission Activity & System Events</p>
+
+    </header>
+
+
+    <main class="logs-container">
+
+        <section class="logs-panel">
+
+            <div class="logs-header">
+                <h2>Recent Activity</h2>
+
+                <span id="logStatus">LIVE</span>
+            </div>
+
+
+            <div class="logs-table">
+
+                <div class="log-row log-heading">
+                    <span>Time</span>
+                    <span>Event</span>
+                    <span>Status</span>
+                </div>
+
+
+                <div id="logList">
+
+                    <div class="log-row">
+                        <span>--:--:--</span>
+                        <span>System initialized</span>
+                        <strong>INFO</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="logs-panel">
+
+            <h2>System Events</h2>
+
+            <div class="event-grid">
+
+                <div class="event-card">
+                    <span>Total Events</span>
+                    <strong id="totalEvents">0</strong>
+                </div>
+
+                <div class="event-card">
+                    <span>Telemetry Updates</span>
+                    <strong id="telemetryUpdates">0</strong>
+                </div>
+
+                <div class="event-card">
+                    <span>System Status</span>
+                    <strong id="systemStatus">NORMAL</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="logs.js"></script>
+
+</body>
+</html>

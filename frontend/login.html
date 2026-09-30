@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Login</title>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+                ◉
+            </div>
+
+            <h1>MISSION CONTROL</h1>
+
+            <p class="login-subtitle">
+                Mission Telemetry & Monitoring System
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label for="username">Username</label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit" class="login-button">
+                    Login
+                </button>
+
+                <p id="loginMessage"></p>
+
+            </form>
+
+
+            <p class="register-text">
+                Don't have an account?
+                <a href="register.html">Register</a>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="login.js"></script>
+
+</body>
+</html>

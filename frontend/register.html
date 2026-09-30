@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Register</title>
+
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="register-card">
+
+            <div class="register-logo">
+                ◉
+            </div>
+
+            <h1>CREATE ACCOUNT</h1>
+
+            <p class="register-subtitle">
+                Mission Telemetry & Monitoring System
+            </p>
+
+
+            <form id="registerForm">
+
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter full name"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="username">Username</label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Create username"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create password"
+                        required
+                    >
+                </div>
+
+
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm password"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit" class="register-button">
+                    Create Account
+                </button>
+
+                <p id="registerMessage"></p>
+
+            </form>
+
+
+            <p class="login-text">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="register.js"></script>
+
+</body>
+</html>

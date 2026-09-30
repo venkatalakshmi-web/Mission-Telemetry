@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemetry</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="telemetry.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">◉</span>
+            <span>MISSION<br>CONTROL</span>
+            <button class="close-sidebar">×</button>
+        </div>
+
+        <nav>
+            <a href="dashboard.html">Home</a>
+            <a href="telemetry.html" class="active">Telemetry</a>
+            <a href="logs.html">Logs</a>
+            <a href="alerts.html">Alerts</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+
+    </aside>
+
+    <header class="dashboard-header">
+
+        <button class="menu-button" id="menuButton">☰</button>
+
+        <h1>Telemetry Monitoring</h1>
+        <p>Live Mission Telemetry Data</p>
+
+    </header>
+    <main class="telemetry-container">
+
+    <section class="telemetry-panel">
+        <h2>Live Telemetry</h2>
+
+        <div class="telemetry-table">
+
+            <div class="telemetry-row">
+                <span>🌡️ Temperature</span>
+                <strong id="temperature">-- °C</strong>
+            </div>
+
+            <div class="telemetry-row">
+                <span>🔋 Battery</span>
+                <strong id="battery">-- %</strong>
+            </div>
+
+            <div class="telemetry-row">
+                <span>⏱️ Pressure</span>
+                <strong id="pressure">-- kPa</strong>
+            </div>
+
+            <div class="telemetry-row">
+                <span>📡 Signal Strength</span>
+                <strong id="signal">-- %</strong>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="telemetry-panel">
+        <h2>System Parameters</h2>
+
+        <div class="parameter-grid">
+
+            <div class="parameter-card">
+                <span>Altitude</span>
+                <strong id="altitude">-- km</strong>
+            </div>
+
+            <div class="parameter-card">
+                <span>Velocity</span>
+                <strong id="velocity">-- km/s</strong>
+            </div>
+
+            <div class="parameter-card">
+                <span>Power Consumption</span>
+                <strong id="power">-- W</strong>
+            </div>
+
+            <div class="parameter-card">
+                <span>Orientation</span>
+                <strong id="orientation">-- °</strong>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="telemetry-panel">
+        <h2>Data Transmission</h2>
+
+        <div class="transmission-grid">
+
+            <div>
+                <span>Packets Sent</span>
+                <strong id="packetsSent">--</strong>
+            </div>
+
+            <div>
+                <span>Packets Received</span>
+                <strong id="packetsReceived">--</strong>
+            </div>
+
+            <div>
+                <span>Communication</span>
+                <strong id="communicationStatus">ONLINE</strong>
+            </div>
+
+            <div>
+                <span>Last Updated</span>
+                <strong id="lastUpdated">--</strong>
+            </div>
+
+        </div>
+    </section>
+<section class="telemetry-panel">
+    <h2>Telemetry Trends</h2>
+
+    <div class="chart-box">
+        <canvas id="telemetryChart"></canvas>
+    </div>
+</section>
+</main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="telemetry.js"></script>
+
+</body>
+</html>
