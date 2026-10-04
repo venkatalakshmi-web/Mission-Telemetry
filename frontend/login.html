@@ -47,6 +47,7 @@
                         type="text"
                         id="username"
                         placeholder="Enter username"
+                        autocomplete="off"
                         required
                     >
 
@@ -67,6 +68,7 @@
                             type="password"
                             id="password"
                             placeholder="Enter password"
+                            autocomplete="new-password"
                             required
                         >
 
@@ -231,6 +233,40 @@
                     `;
 
                 }
+
+            }
+        );
+
+
+        /*
+         * Clear old login values when
+         * the login page is opened.
+         */
+
+        function clearLoginFields() {
+
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+
+        }
+
+
+        window.addEventListener(
+            "pageshow",
+            function () {
+
+                clearLoginFields();
+
+                /*
+                 * Firefox may restore saved form
+                 * values slightly after page load.
+                 * Clear them again after a short delay.
+                 */
+
+                setTimeout(
+                    clearLoginFields,
+                    300
+                );
 
             }
         );

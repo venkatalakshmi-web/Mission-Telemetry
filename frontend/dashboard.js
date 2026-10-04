@@ -1,6 +1,12 @@
 if (localStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "login.html";
 }
+const welcomeUser = document.getElementById("welcomeUser");
+const userName = localStorage.getItem("userName");
+
+if (welcomeUser && userName) {
+    welcomeUser.textContent = "Welcome, " + userName;
+}
 const closeButton = document.querySelector(".close-sidebar");
 const menuButton = document.querySelector("#menuButton");
 const sidebar = document.querySelector(".sidebar");
@@ -217,7 +223,7 @@ if (logoutButton) {
     logoutButton.addEventListener("click", function () {
 
         localStorage.removeItem("isLoggedIn");
-
+        localStorage.removeItem("userName");
         window.location.href = "login.html";
     });
 }

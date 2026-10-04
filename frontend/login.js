@@ -1,6 +1,9 @@
 const loginForm = document.getElementById("loginForm");
 const loginMessage = document.getElementById("loginMessage");
-
+window.addEventListener("pageshow", function () {
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+});
 loginForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
@@ -47,6 +50,7 @@ loginForm.addEventListener("submit", function (event) {
 
         if (result.status === 200) {
             localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userName", result.data.user.full_name);
             loginMessage.textContent =
                 "Login successful. Opening dashboard...";
 
