@@ -5,7 +5,7 @@ import psutil
 import random
 import threading
 from datetime import datetime
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 CORS(app)
@@ -76,7 +76,7 @@ def register():
     full_name = data["full_name"]
     username = data["username"]
     password = data["password"]
-
+    password = generate_password_hash(password)
     cursor = db.cursor()
 
     cursor.execute(
@@ -119,7 +119,6 @@ def register():
 # --------------------------------
 # LOGIN USER
 # --------------------------------
-
 @app.route("/login", methods=["POST"])
 def login():
 
@@ -134,26 +133,26 @@ def login():
 
     cursor.execute(
         """
-        SELECT id, full_name, username
+        SELECT id, full_name, username, password
         FROM users
         WHERE username = %s
-        AND password = %s
         """,
-        (
-            username,
-            password
-        )
+        (username,)
     )
 
     user = cursor.fetchone()
 
     cursor.close()
 
-    if user:
+    if user and check_password_hash(user["password"], password):
 
         return jsonify({
             "message": "Login successful",
-            "user": user
+            "user": {
+                "id": user["id"],
+                "full_name": user["full_name"],
+                "username": user["username"]
+            }
         }), 200
 
     return jsonify({
@@ -174,7 +173,7 @@ def reset_password():
 
     username = data["username"]
     new_password = data["new_password"]
-
+    new_password = generate_password_hash(new_password)
     cursor = db.cursor()
 
     cursor.execute(

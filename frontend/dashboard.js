@@ -1,3 +1,6 @@
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
 const closeButton = document.querySelector(".close-sidebar");
 const menuButton = document.querySelector("#menuButton");
 const sidebar = document.querySelector(".sidebar");
@@ -208,3 +211,13 @@ setInterval(
     updateTelemetry,
     3000
 );
+const logoutButton = document.getElementById("logoutButton");
+
+if (logoutButton) {
+    logoutButton.addEventListener("click", function () {
+
+        localStorage.removeItem("isLoggedIn");
+
+        window.location.href = "login.html";
+    });
+}

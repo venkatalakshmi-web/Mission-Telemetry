@@ -46,7 +46,7 @@ loginForm.addEventListener("submit", function (event) {
     .then(result => {
 
         if (result.status === 200) {
-
+            localStorage.setItem("isLoggedIn", "true");
             loginMessage.textContent =
                 "Login successful. Opening dashboard...";
 
