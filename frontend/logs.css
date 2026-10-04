@@ -6,6 +6,25 @@
     margin-right: 30px;
 }
 
+
+/* =========================
+   MISSION CONTROL
+   Match Dashboard
+========================= */
+
+.sidebar .logo span:not(.logo-icon) {
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.15;
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   LOGS PANEL
+========================= */
+
 .logs-panel {
     background: rgba(8, 28, 50, 0.9);
     padding: 25px;
@@ -21,6 +40,11 @@
     color: white;
     font-size: 21px;
 }
+
+
+/* =========================
+   LOG HEADER
+========================= */
 
 .logs-header {
     display: flex;
@@ -39,7 +63,9 @@
 }
 
 
-/* Logs Table */
+/* =========================
+   LOGS TABLE
+========================= */
 
 .logs-table {
     display: grid;
@@ -74,7 +100,9 @@
 }
 
 
-/* System Events */
+/* =========================
+   SYSTEM EVENTS
+========================= */
 
 .event-grid {
     display: grid;
@@ -103,7 +131,9 @@
 }
 
 
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 800px) {
 

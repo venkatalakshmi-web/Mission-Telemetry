@@ -6,6 +6,20 @@
     margin-right: 30px;
 }
 
+
+/* Mission Control - Match Dashboard */
+
+.sidebar .logo span:not(.logo-icon) {
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.15;
+    letter-spacing: 1px;
+}
+
+
+/* Settings Panel */
+
 .settings-panel {
     background: rgba(8, 28, 50, 0.9);
     padding: 25px;

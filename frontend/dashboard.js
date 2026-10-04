@@ -41,13 +41,15 @@ function updateTelemetry() {
 
         .then(data => {
 
-            if (data.length === 0) return;
+            if (data.length === 0) {
+                return;
+            }
 
             const latest = data[0];
 
 
             /* -------------------------------
-               TELEMETRY VALUES
+               MAIN TELEMETRY VALUES
             -------------------------------- */
 
             const temperature =
@@ -64,7 +66,24 @@ function updateTelemetry() {
 
 
             /* -------------------------------
-               DISPLAY VALUES
+               ADDITIONAL TELEMETRY VALUES
+            -------------------------------- */
+
+            const altitude =
+                Number(latest.altitude);
+
+            const velocity =
+                Number(latest.velocity);
+
+            const power =
+                Number(latest.power);
+
+            const orientation =
+                Number(latest.orientation);
+
+
+            /* -------------------------------
+               DISPLAY MAIN VALUES
             -------------------------------- */
 
             document.getElementById("temperature").textContent =
@@ -81,19 +100,47 @@ function updateTelemetry() {
 
 
             /* -------------------------------
+               DISPLAY ADDITIONAL VALUES
+            -------------------------------- */
+
+            document.getElementById("altitude").textContent =
+                altitude + " km";
+
+            document.getElementById("velocity").textContent =
+                velocity + " km/s";
+
+            document.getElementById("power").textContent =
+                power + " W";
+
+            document.getElementById("orientation").textContent =
+                orientation + " °";
+
+
+            /* -------------------------------
                PROGRESS BARS
             -------------------------------- */
 
-            document.querySelector(".temperature-progress").style.width =
+            document.querySelector(
+                ".temperature-progress"
+            ).style.width =
                 ((temperature - 20) / 20 * 100) + "%";
 
-            document.querySelector(".battery-progress").style.width =
+
+            document.querySelector(
+                ".battery-progress"
+            ).style.width =
                 battery + "%";
 
-            document.querySelector(".pressure-progress").style.width =
+
+            document.querySelector(
+                ".pressure-progress"
+            ).style.width =
                 ((pressure - 95) / 10 * 100) + "%";
 
-            document.querySelector(".signal-progress").style.width =
+
+            document.querySelector(
+                ".signal-progress"
+            ).style.width =
                 signal + "%";
 
 
@@ -157,4 +204,7 @@ updateTelemetry();
    UPDATE EVERY 3 SECONDS
 -------------------------------- */
 
-setInterval(updateTelemetry, 3000);
+setInterval(
+    updateTelemetry,
+    3000
+);

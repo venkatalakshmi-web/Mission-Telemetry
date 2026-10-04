@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Mission Login</title>
 
     <link rel="stylesheet" href="login.css">
+
 </head>
+
 
 <body>
 
@@ -28,8 +34,14 @@
 
             <form id="loginForm">
 
+
+                <!-- USERNAME -->
+
                 <div class="input-group">
-                    <label for="username">Username</label>
+
+                    <label for="username">
+                        Username
+                    </label>
 
                     <input
                         type="text"
@@ -37,34 +49,113 @@
                         placeholder="Enter username"
                         required
                     >
+
                 </div>
 
+
+                <!-- PASSWORD -->
 
                 <div class="input-group">
-                    <label for="password">Password</label>
 
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter password"
-                        required
-                    >
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-container">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+
+                            <svg
+                                id="eyeIcon"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <path
+                                    d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"
+                                />
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="3"
+                                />
+
+                                <line
+                                    x1="3"
+                                    y1="3"
+                                    x2="21"
+                                    y2="21"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
                 </div>
 
 
-                <button type="submit" class="login-button">
+                <!-- FORGOT PASSWORD -->
+
+                <div class="forgot-password-container">
+
+                    <a href="forgot-password.html">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
                     Login
                 </button>
 
+
+                <!-- LOGIN MESSAGE -->
+
                 <p id="loginMessage"></p>
+
 
             </form>
 
 
+            <!-- REGISTER -->
+
             <p class="register-text">
+
                 Don't have an account?
-                <a href="register.html">Register</a>
+
+                <a href="register.html">
+                    Register
+                </a>
+
             </p>
+
 
         </div>
 
@@ -73,5 +164,79 @@
 
     <script src="login.js"></script>
 
+
+    <script>
+
+        const password =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const eyeIcon =
+            document.getElementById("eyeIcon");
+
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (password.type === "password") {
+
+                    password.type = "text";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                    eyeIcon.innerHTML = `
+                        <path
+                            d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"
+                        />
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="3"
+                        />
+                    `;
+
+                } else {
+
+                    password.type = "password";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                    eyeIcon.innerHTML = `
+                        <path
+                            d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"
+                        />
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="3"
+                        />
+
+                        <line
+                            x1="3"
+                            y1="3"
+                            x2="21"
+                            y2="21"
+                        />
+                    `;
+
+                }
+
+            }
+        );
+
+    </script>
+
 </body>
+
 </html>

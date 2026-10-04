@@ -3,6 +3,9 @@ from flask_cors import CORS
 import mysql.connector
 import psutil
 import random
+import threading
+from datetime import datetime
+
 
 app = Flask(__name__)
 CORS(app)
@@ -43,6 +46,13 @@ def ensure_db_connection():
 
 
 # --------------------------------
+# TELEMETRY GENERATION LOCK
+# --------------------------------
+
+telemetry_lock = threading.Lock()
+
+
+# --------------------------------
 # HOME
 # --------------------------------
 
@@ -50,6 +60,157 @@ def ensure_db_connection():
 def home():
 
     return "Mission Telemetry Backend + MySQL Connected!"
+
+
+# --------------------------------
+# REGISTER USER
+# --------------------------------
+
+@app.route("/register", methods=["POST"])
+def register():
+
+    ensure_db_connection()
+
+    data = request.json
+
+    full_name = data["full_name"]
+    username = data["username"]
+    password = data["password"]
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT id FROM users WHERE username = %s",
+        (username,)
+    )
+
+    existing_user = cursor.fetchone()
+
+    if existing_user:
+
+        cursor.close()
+
+        return jsonify({
+            "message": "Username already exists"
+        }), 409
+
+    cursor.execute(
+        """
+        INSERT INTO users
+        (full_name, username, password)
+        VALUES (%s, %s, %s)
+        """,
+        (
+            full_name,
+            username,
+            password
+        )
+    )
+
+    db.commit()
+
+    cursor.close()
+
+    return jsonify({
+        "message": "Registration successful"
+    }), 201
+
+
+# --------------------------------
+# LOGIN USER
+# --------------------------------
+
+@app.route("/login", methods=["POST"])
+def login():
+
+    ensure_db_connection()
+
+    data = request.json
+
+    username = data["username"]
+    password = data["password"]
+
+    cursor = db.cursor(dictionary=True)
+
+    cursor.execute(
+        """
+        SELECT id, full_name, username
+        FROM users
+        WHERE username = %s
+        AND password = %s
+        """,
+        (
+            username,
+            password
+        )
+    )
+
+    user = cursor.fetchone()
+
+    cursor.close()
+
+    if user:
+
+        return jsonify({
+            "message": "Login successful",
+            "user": user
+        }), 200
+
+    return jsonify({
+        "message": "Invalid username or password"
+    }), 401
+
+
+# --------------------------------
+# RESET PASSWORD
+# --------------------------------
+
+@app.route("/reset-password", methods=["PUT"])
+def reset_password():
+
+    ensure_db_connection()
+
+    data = request.json
+
+    username = data["username"]
+    new_password = data["new_password"]
+
+    cursor = db.cursor()
+
+    cursor.execute(
+        "SELECT id FROM users WHERE username = %s",
+        (username,)
+    )
+
+    user = cursor.fetchone()
+
+    if not user:
+
+        cursor.close()
+
+        return jsonify({
+            "message": "Username not found"
+        }), 404
+
+    cursor.execute(
+        """
+        UPDATE users
+        SET password = %s
+        WHERE username = %s
+        """,
+        (
+            new_password,
+            username
+        )
+    )
+
+    db.commit()
+
+    cursor.close()
+
+    return jsonify({
+        "message": "Password reset successful"
+    }), 200
 
 
 # --------------------------------
@@ -63,7 +224,9 @@ def users():
 
     cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM users")
+    cursor.execute(
+        "SELECT * FROM users"
+    )
 
     data = cursor.fetchall()
 
@@ -82,63 +245,93 @@ def generate_telemetry():
 
     cursor = db.cursor()
 
-
     temperature = round(
-        random.uniform(25, 32), 2
+        random.uniform(25, 32),
+        2
     )
 
     pressure = round(
-        random.uniform(99, 103), 2
+        random.uniform(99, 103),
+        2
     )
 
     signal_strength = round(
-        random.uniform(80, 95), 2
+        random.uniform(80, 95),
+        2
     )
 
     altitude = round(
-        random.uniform(418, 423), 2
+        random.uniform(418, 423),
+        2
     )
 
     velocity = round(
-        random.uniform(7.5, 8.2), 2
+        random.uniform(7.5, 8.2),
+        2
     )
 
     power = round(
-        random.uniform(60, 70), 2
+        random.uniform(60, 70),
+        2
     )
 
     orientation = round(
-        random.uniform(10, 15), 2
+        random.uniform(10, 15),
+        2
     )
 
     packets_sent = random.randint(
-        1000, 10000
+        1000,
+        10000
     )
 
     packets_received = random.randint(
-        950, packets_sent
+        950,
+        packets_sent
     )
 
-
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO telemetry
-        (temperature, battery, pressure, signal_strength,
-         altitude, velocity, power, orientation,
-         packets_sent, packets_received)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """, (
-        temperature,
-        None,
-        pressure,
-        signal_strength,
-        altitude,
-        velocity,
-        power,
-        orientation,
-        packets_sent,
-        packets_received
-    ))
-
+        (
+            temperature,
+            battery,
+            pressure,
+            signal_strength,
+            altitude,
+            velocity,
+            power,
+            orientation,
+            packets_sent,
+            packets_received
+        )
+        VALUES
+        (
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s,
+            %s
+        )
+        """,
+        (
+            temperature,
+            None,
+            pressure,
+            signal_strength,
+            altitude,
+            velocity,
+            power,
+            orientation,
+            packets_sent,
+            packets_received
+        )
+    )
 
     db.commit()
 
@@ -154,27 +347,77 @@ def telemetry():
 
     ensure_db_connection()
 
-    generate_telemetry()
+    with telemetry_lock:
+
+        cursor = db.cursor(
+            dictionary=True
+        )
+
+        # Get latest telemetry record
+        cursor.execute(
+            """
+            SELECT *
+            FROM telemetry
+            ORDER BY timestamp DESC
+            LIMIT 1
+            """
+        )
+
+        latest = cursor.fetchone()
+
+        cursor.close()
 
 
+        # Generate new data only if
+        # latest record is older than 3 seconds
+
+        should_generate = False
+
+        if latest is None:
+
+            should_generate = True
+
+        else:
+
+            latest_time = latest["timestamp"]
+
+            current_time = datetime.now()
+
+            time_difference = (
+                current_time - latest_time
+            ).total_seconds()
+
+            if time_difference >= 3:
+
+                should_generate = True
+
+
+        if should_generate:
+
+            generate_telemetry()
+
+
+    # Fetch latest telemetry record
     cursor = db.cursor(
         dictionary=True
     )
 
-    cursor.execute("""
+    cursor.execute(
+        """
         SELECT *
         FROM telemetry
         ORDER BY timestamp DESC
         LIMIT 20
-    """)
+        """
+    )
 
     data = cursor.fetchall()
 
     cursor.close()
 
 
+    # Laptop battery
     battery = psutil.sensors_battery()
-
 
     if battery and data:
 
@@ -194,6 +437,7 @@ def telemetry():
 # --------------------------------
 # ALERTS
 # --------------------------------
+
 @app.route("/alerts", methods=["POST"])
 def add_alert():
 
@@ -202,6 +446,7 @@ def add_alert():
     data = request.json
 
     try:
+
         ensure_db_connection()
 
         cursor = db.cursor()
@@ -217,15 +462,18 @@ def add_alert():
 
         cursor = db.cursor()
 
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO alerts
         (alert_type, message, status)
         VALUES (%s, %s, %s)
-    """, (
-        data["alert_type"],
-        data["message"],
-        data["status"]
-    ))
+        """,
+        (
+            data["alert_type"],
+            data["message"],
+            data["status"]
+        )
+    )
 
     db.commit()
 
@@ -234,6 +482,8 @@ def add_alert():
     return jsonify({
         "message": "Alert saved successfully"
     })
+
+
 # --------------------------------
 # ADD LOG
 # --------------------------------
@@ -247,21 +497,21 @@ def add_log():
 
     cursor = db.cursor()
 
-
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO mission_logs
         (event, status)
         VALUES (%s, %s)
-    """, (
-        data["event"],
-        data["status"]
-    ))
-
+        """,
+        (
+            data["event"],
+            data["status"]
+        )
+    )
 
     db.commit()
 
     cursor.close()
-
 
     return jsonify({
         "message": "Log saved successfully"
@@ -281,19 +531,18 @@ def get_logs():
         dictionary=True
     )
 
-
-    cursor.execute("""
+    cursor.execute(
+        """
         SELECT *
         FROM mission_logs
         ORDER BY timestamp DESC
         LIMIT 20
-    """)
-
+        """
+    )
 
     data = cursor.fetchall()
 
     cursor.close()
-
 
     return jsonify(data)
 
@@ -311,19 +560,18 @@ def get_settings():
         dictionary=True
     )
 
-
-    cursor.execute("""
+    cursor.execute(
+        """
         SELECT *
         FROM settings
         ORDER BY id DESC
         LIMIT 1
-    """)
-
+        """
+    )
 
     data = cursor.fetchone()
 
     cursor.close()
-
 
     return jsonify(data)
 
@@ -341,26 +589,26 @@ def update_settings():
 
     cursor = db.cursor()
 
-
-    cursor.execute("""
+    cursor.execute(
+        """
         UPDATE settings
         SET telemetry_monitoring = %s,
             alert_monitoring = %s,
             auto_refresh = %s,
             notifications = %s
         WHERE id = 1
-    """, (
-        data["telemetry_monitoring"],
-        data["alert_monitoring"],
-        data["auto_refresh"],
-        data["notifications"]
-    ))
-
+        """,
+        (
+            data["telemetry_monitoring"],
+            data["alert_monitoring"],
+            data["auto_refresh"],
+            data["notifications"]
+        )
+    )
 
     db.commit()
 
     cursor.close()
-
 
     return jsonify({
         "message": "Settings updated successfully"
@@ -374,5 +622,6 @@ def update_settings():
 if __name__ == "__main__":
 
     app.run(
-        debug=True
+        debug=True,
+        use_reloader=False
     )

@@ -1,84 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Mission Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+
+    <link
+        rel="stylesheet"
+        href="dashboard.css"
+    >
+
 </head>
 
+
 <body>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
     <aside class="sidebar">
 
-    <div class="logo">
-    <span class="logo-icon">◉</span>
-    <span>MISSION<br>CONTROL</span>
-    <button class="close-sidebar">×</button>
-</div>
+        <div class="logo">
 
-    <nav>
-        <a href="dashboard.html" class="active">Home</a>
-        <a href="telemetry.html">Telemetry</a>
-        <a href="logs.html">Logs</a>
-        <a href="alerts.html">Alerts</a>
-        <a href="settings.html">Settings</a>
-    </nav>
+            <div class="logo-brand">
+
+                <span class="logo-icon">
+                    ◉
+                </span>
+
+                <span class="logo-text">
+                    MISSION<br>
+                    CONTROL
+                </span>
+
+            </div>
+
+            <button
+                class="close-sidebar"
+                aria-label="Close sidebar"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <nav>
+
+            <a
+                href="dashboard.html"
+                class="active"
+            >
+                Home
+            </a>
+
+            <a href="telemetry.html">
+                Telemetry
+            </a>
+
+            <a href="logs.html">
+                Logs
+            </a>
+
+            <a href="alerts.html">
+                Alerts
+            </a>
+
+            <a href="settings.html">
+                Settings
+            </a>
+
+        </nav>
 
     </aside>
+
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <header class="dashboard-header">
-        <button class="menu-button" id="menuButton">☰</button>
-        <h1>Mission Telemetry Dashboard</h1>
-        <p>Real-Time Mission Monitoring</p>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+        <div>
+
+            <h1>
+                Mission Telemetry Dashboard
+            </h1>
+
+            <p>
+                Real-Time Mission Monitoring
+            </p>
+
+        </div>
+
     </header>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
     <main class="dashboard-container">
 
+
+        <!-- =========================
+             MISSION STATUS
+        ========================== -->
+
         <section class="status-card">
-            <h2>Mission Status</h2>
-            <p id="missionStatus"><span class="status-dot"></span> MISSION ACTIVE</p>
+
+            <div>
+
+                <h2>
+                    Mission Status
+                </h2>
+
+                <p id="missionStatus">
+
+                    <span class="status-dot"></span>
+
+                    MISSION ACTIVE
+
+                </p>
+
+            </div>
+
         </section>
-    <div class="telemetry-grid">
 
-        <div class="telemetry-card temperature-card">
-            <div class="telemetry-icon">🌡️</div>
-                <h3>Temperature</h3>
-                <p id="temperature">-- °C</p>
-            <div class="progress">
-                <div class="progress-bar temperature-progress"></div>
-        </div>
-    </div>
 
-    <div class="telemetry-card battery-card">
-        <div class="telemetry-icon">🔋</div>
-            <h3>Battery</h3>
-            <p id="battery">-- %</p>
-            <div class="progress">
-                <div class="progress-bar battery-progress"></div>
+
+        <!-- =========================
+             TELEMETRY CARDS
+        ========================== -->
+
+        <section class="telemetry-grid">
+
+
+            <!-- TEMPERATURE -->
+
+            <div class="telemetry-card temperature-card">
+
+                <div class="telemetry-icon">
+                    🌡️
+                </div>
+
+                <h3>
+                    Temperature
+                </h3>
+
+                <p id="temperature">
+                    -- °C
+                </p>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar temperature-progress"
+                    ></div>
+
+                </div>
+
             </div>
-        </div>
-    <div class="telemetry-card pressure-card">
-        <div class="telemetry-icon">⏱️</div>
-            <h3>Pressure</h3>
-            <p id="pressure">-- kPa</p>
-            <div class="progress">
-                <div class="progress-bar pressure-progress"></div>
+
+
+
+            <!-- BATTERY -->
+
+            <div class="telemetry-card battery-card">
+
+                <div class="telemetry-icon">
+                    🔋
+                </div>
+
+                <h3>
+                    Battery
+                </h3>
+
+                <p id="battery">
+                    -- %
+                </p>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar battery-progress"
+                    ></div>
+
+                </div>
+
             </div>
-        </div>
-    <div class="telemetry-card signal-card">
-        <div class="telemetry-icon">📡</div>
-            <h3>Signal</h3>
-            <p id="signal">-- %</p>
-            <div class="progress">
-                <div class="progress-bar signal-progress"></div>
+
+
+
+            <!-- PRESSURE -->
+
+            <div class="telemetry-card pressure-card">
+
+                <div class="telemetry-icon">
+                    ⏱️
+                </div>
+
+                <h3>
+                    Pressure
+                </h3>
+
+                <p id="pressure">
+                    -- kPa
+                </p>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar pressure-progress"
+                    ></div>
+
+                </div>
+
             </div>
-        </div>
-</div>
+
+
+
+            <!-- SIGNAL -->
+
+            <div class="telemetry-card signal-card">
+
+                <div class="telemetry-icon">
+                    📡
+                </div>
+
+                <h3>
+                    Signal
+                </h3>
+
+                <p id="signal">
+                    -- %
+                </p>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar signal-progress"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ALTITUDE -->
+
+            <div class="telemetry-card altitude-card">
+
+                <div class="telemetry-icon">
+                    🛰️
+                </div>
+
+                <h3>
+                    Altitude
+                </h3>
+
+                <p id="altitude">
+                    -- km
+                </p>
+
+            </div>
+
+
+
+            <!-- VELOCITY -->
+
+            <div class="telemetry-card velocity-card">
+
+                <div class="telemetry-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Velocity
+                </h3>
+
+                <p id="velocity">
+                    -- km/s
+                </p>
+
+            </div>
+
+
+
+            <!-- POWER -->
+
+            <div class="telemetry-card power-card">
+
+                <div class="telemetry-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Power
+                </h3>
+
+                <p id="power">
+                    -- W
+                </p>
+
+            </div>
+
+
+
+            <!-- ORIENTATION -->
+
+            <div class="telemetry-card orientation-card">
+
+                <div class="telemetry-icon">
+                    🧭
+                </div>
+
+                <h3>
+                    Orientation
+                </h3>
+
+                <p id="orientation">
+                    -- °
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             ALERTS
+        ========================== -->
+
         <section class="alerts-section">
-            <h2>Alerts</h2>
-            <p id="alertMessage">No active alerts.</p>
+
+            <h2>
+                Alerts
+            </h2>
+
+            <p id="alertMessage">
+                No active alerts.
+            </p>
+
         </section>
+
 
     </main>
-<script src="dashboard.js"></script>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="dashboard.js"></script>
+
 </body>
+
 </html>

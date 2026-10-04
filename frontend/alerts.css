@@ -7,6 +7,17 @@
 }
 
 
+/* Mission Control - Match Dashboard */
+
+.sidebar .logo span:not(.logo-icon) {
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.15;
+    letter-spacing: 1px;
+}
+
+
 /* Summary */
 
 .alert-summary {
